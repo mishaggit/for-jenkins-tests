@@ -4,9 +4,6 @@ pipeline {
       PROJECT_NAME = "TestTerraform"
       OWNER_NAME   = "Misha"
     }
-    tools {
-        terraform 'terraform'
-    }
 
     stages {
         stage('1-Build') {
