@@ -36,6 +36,7 @@ pipeline {
         }
         stage ("terraform init") {
             steps {
+		sh "echo $PATH"
                 sh 'terraform init'
             }
         }
