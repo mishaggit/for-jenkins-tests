@@ -4,6 +4,9 @@ pipeline {
       PROJECT_NAME = "TestTerraform"
       OWNER_NAME   = "Misha"
     }
+    tools {
+        terraform 'terraform'
+    }
 
     stages {
         stage('1-Build') {
@@ -32,6 +35,30 @@ pipeline {
                    echo "Line2"
                 '''
                 echo "End of Stage Build..."
+            }
+        }
+        stage ("terraform init") {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage ("terraform validate") {
+            steps {
+                sh 'terraform validate'
+            }
+        }
+        stage ("terrafrom plan") {
+            steps {
+                sh 'terraform plan '
+            }
+        }
+        stage ("terraform apply") {
+            input {
+                message "For approve write - yes"
+		ok "yes"
+	    }
+            steps {
+                sh 'terraform apply --auto-approve'
             }
         }
         stage('4-Celebrate') {
