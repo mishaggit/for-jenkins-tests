@@ -22,8 +22,8 @@ pipeline {
         stage ("Terraform Command") {
             steps {
 		        sh "echo $PATH"
-                echo "Choice: ${params.CHOICE}"
-                sh 'terraform ${CHOICES}'
+                echo "Choice: ${params.CHOICES}"
+                sh '${CHOICES}'
             }
         }
         stage('Plan') {
