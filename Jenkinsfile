@@ -1,9 +1,10 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'environment', defaultValue: 'default', description: 'Workspace/environment file to use for deployment')
-        string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
-        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+        //string(name: 'environment', defaultValue: 'default', description: 'Workspace/environment file to use for deployment')
+        //string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
+        choice(name: 'CHOICES', choices: ['terraform init', 'terraform validate', 'terraform plan', 'terraform apply'], description: 'Choose terraform command')
+        //booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
     environment {
       PROJECT_NAME = "TestTerraform"
@@ -13,15 +14,16 @@ pipeline {
         stage('2-Test') {
             steps {
                 echo "Testing..................................."
-                echo "Privet ${PROJECT_NAME}"
-                echo "Owner is ${OWNER_NAME}"
+                //echo "Privet ${PROJECT_NAME}"
+                //echo "Owner is ${OWNER_NAME}"
                 echo "End of Stage Build........................"
             }
         }
-        stage ("terraform init") {
+        stage ("Terraform Command") {
             steps {
 		        sh "echo $PATH"
-                sh 'terraform init'
+                echo "Choice: ${params.CHOICE}"
+                sh 'terraform ${CHOICES}'
             }
         }
         stage('Plan') {
