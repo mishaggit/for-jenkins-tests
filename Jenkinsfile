@@ -23,6 +23,8 @@ pipeline {
             steps {
 		        sh "echo $PATH"
                 echo "Choice: ${params.CHOICES}"
+                sh "cd service_accounts"
+                sh "pwd"
                 sh '${CHOICES}'
             }
         }
