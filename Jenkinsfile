@@ -1,68 +1,67 @@
 pipeline {
     agent any
+    parameters {
+        string(name: 'environment', defaultValue: 'default', description: 'Workspace/environment file to use for deployment')
+        string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
+        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+    }
     environment {
       PROJECT_NAME = "TestTerraform"
       OWNER_NAME   = "Misha"
     }
-
     stages {
-        stage('1-Build') {
-            steps {
-                echo "Start of Stage Build..."
-                echo "Building......."
-                echo "End of Stage Build..."
-            }
-        }
         stage('2-Test') {
             steps {
-                echo "Start of Stage Test..."
-                echo "Testing......."
+                echo "Testing..................................."
                 echo "Privet ${PROJECT_NAME}"
                 echo "Owner is ${OWNER_NAME}"
-                echo "End of Stage Build..."
-            }
-        }
-        stage('3-Deploy') {
-            steps {
-                echo "Start of Stage Deploy..."
-                echo "Deploying......."
-                sh "ls -la"
-                sh '''
-                   echo "Line1"
-                   echo "Line2"
-                '''
-                echo "End of Stage Build..."
+                echo "End of Stage Build........................"
             }
         }
         stage ("terraform init") {
             steps {
-		sh "echo $PATH"
+		        sh "echo $PATH"
                 sh 'terraform init'
             }
         }
-        stage ("terraform validate") {
+        stage('Plan') {
             steps {
-                sh 'terraform validate'
+                script {
+                    currentBuild.displayName = params.version
+                }
+                sh 'terraform init -input=false'
+                sh 'terraform workspace select ${environment}'
+                sh "terraform plan -input=false -out tfplan -var 'version=${params.version}' --var-file=environments/${params.environment}.tfvars"
+                sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
-        stage ("terrafrom plan") {
+
+        stage('Approval') {
+            when {
+                not {
+                    equals expected: true, actual: params.autoApprove
+                }
+            }
+
             steps {
-                sh 'terraform plan '
+                script {
+                    def plan = readFile 'tfplan.txt'
+                    input message: "Do you want to apply the plan?",
+                        parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                }
             }
         }
-        stage ("terraform apply") {
-            input {
-                message "For approve write - yes"
-		ok "yes"
-	    }
+
+        stage('Apply') {
             steps {
-                sh 'terraform apply --auto-approve'
+                sh "terraform apply -input=false tfplan"
             }
         }
-        stage('4-Celebrate') {
-            steps {
-                echo "CONGRATULYACIYA!"
-            }
-        }	
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'tfplan.txt'
+        }
     }
 }
