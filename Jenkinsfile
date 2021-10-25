@@ -25,7 +25,7 @@ pipeline {
                 echo "Choice is ${params.CHOICES}"
                 dir("${params.FOLDERTF}"){
                     script {
-                        if (${params.CHOICES} == 'terraform plan'){
+                        if ("${params.CHOICES}" == 'terraform plan'){
                             sh "terraform init"
                             sh "terraform validate"
                             sh "${params.CHOICES}"
