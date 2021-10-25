@@ -23,7 +23,11 @@ pipeline {
             steps {
 		        sh "echo $PATH"
                 echo "Choice: ${params.CHOICES}"
-                sh "cd service_accounts"
+                sh "pwd"
+                dir("/Users/misha/Documents/repos/for-jenkins-tests/service_accounts"){
+                    sh "pwd"
+                }
+                //sh "cd service_accounts" //folder as parametr 
                 sh "pwd"
                 sh '${CHOICES}'
             }
