@@ -26,10 +26,11 @@ pipeline {
                 sh "pwd"
                 dir("/Users/misha/Documents/repos/for-jenkins-tests/service_accounts"){
                     sh "pwd"
+                    sh '${CHOICES}'
+                    echo "Privet ${PROJECT_NAME}"
                 }
                 //sh "cd service_accounts" //folder as parametr 
                 sh "pwd"
-                sh '${CHOICES}'
             }
         }
         stage('Plan') {
