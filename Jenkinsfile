@@ -1,9 +1,9 @@
 pipeline {
     agent any
     parameters {
-        //string(name: 'environment', defaultValue: 'default', description: 'Workspace/environment file to use for deployment')
+        choice(name: 'CHOICES', choices: ['terraform plan', 'terraform apply'], description: 'Choose terraform command')
+        string(name: 'FOLDERTF', defaultValue: '/Users/misha/Documents/repos/for-jenkins-tests/service_accounts', description: 'Folder with .tf files')
         //string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
-        choice(name: 'CHOICES', choices: ['terraform init', 'terraform validate', 'terraform plan', 'terraform apply'], description: 'Choose terraform command')
         //booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
     environment {
@@ -11,26 +11,32 @@ pipeline {
       OWNER_NAME   = "Misha"
     }
     stages {
-        stage('2-Test') {
+        stage('1-Test') {
             steps {
                 echo "Testing..................................."
                 //echo "Privet ${PROJECT_NAME}"
                 //echo "Owner is ${OWNER_NAME}"
+                sh "echo $PATH"
                 echo "End of Stage Build........................"
             }
         }
         stage ("Terraform Command") {
             steps {
-		        sh "echo $PATH"
-                echo "Choice: ${params.CHOICES}"
-                sh "pwd"
-                dir("/Users/misha/Documents/repos/for-jenkins-tests/service_accounts"){
-                    sh "pwd"
-                    sh '${CHOICES}'
-                    echo "Privet ${PROJECT_NAME}"
+                echo "Choice is ${params.CHOICES}"
+                dir("${params.FOLDERTF}"){
+                    script {
+                        if (${params.CHOICES} == 'terraform plan'){
+                            sh "terraform init"
+                            sh "terraform validate"
+                            sh "${params.CHOICES}"
+                        } else {
+                            sh "terraform init"
+                            sh "terraform validate"
+                            sh "terraform plan"
+                            sh "${params.CHOICES}"
+                        }
+                    }
                 }
-                //sh "cd service_accounts" //folder as parametr 
-                sh "pwd"
             }
         }
         stage('Plan') {
