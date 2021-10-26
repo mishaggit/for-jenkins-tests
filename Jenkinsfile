@@ -27,6 +27,7 @@ pipeline {
                 echo "Choice is ${params.CHOICES}"
                 dir("${params.FOLDERTF}"){
                     script {
+                        sh "echo $PATH"
                         sh "terraform init"
                         sh "terraform validate"
                         sh "terraform plan"
