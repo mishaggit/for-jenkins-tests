@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'slave'
+    }
     parameters {
         choice(name: 'CHOICES', choices: ['terraform plan', 'terraform apply'], description: 'Choose terraform command')
         string(name: 'FOLDERTF', defaultValue: '/Users/misha/Documents/repos/for-jenkins-tests/service_accounts', description: 'Folder with .tf files')
