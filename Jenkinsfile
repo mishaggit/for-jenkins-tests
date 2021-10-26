@@ -4,7 +4,7 @@ pipeline {
     }
     parameters {
         choice(name: 'CHOICES', choices: ['terraform plan', 'terraform apply'], description: 'Choose terraform command')
-        string(name: 'FOLDERTF', defaultValue: '/Users/misha/Documents/repos/for-jenkins-tests/service_accounts', description: 'Folder with .tf files')
+        string(name: 'FOLDERTF', defaultValue: 'service_accounts', description: 'Folder with .tf files')
         //string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
         //booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
@@ -27,13 +27,12 @@ pipeline {
                 echo "Choice is ${params.CHOICES}"
                 dir("${params.FOLDERTF}"){
                     script {
+                        sh "terraform init"
+                        sh "terraform validate"
+                        sh "terraform plan"
                         if ("${params.CHOICES}" == 'terraform plan'){
-                            sh "terraform init"
-                            sh "terraform validate"
                             sh "${params.CHOICES}"
                         } else {
-                            sh "terraform init"
-                            sh "terraform validate"
                             sh "terraform plan"
                             sh "${params.CHOICES}"
                         }
