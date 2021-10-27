@@ -28,15 +28,20 @@ pipeline {
                 dir("${params.FOLDERTF}"){
                     script {
                         sh "echo $PATH"
-                        sh "terraform init"
-                        sh "terraform validate"
-                        sh "terraform plan"
+                        sh "terraform init -no-color"
+                        sh "terraform validate -no-color"
+                        sh "terraform plan -no-color"
                         if ("${params.CHOICES}" == 'terraform apply'){
                             sh "${params.CHOICES}"
                         }
                     }
                 }
             }
+        }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
