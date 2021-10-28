@@ -24,17 +24,19 @@ pipeline {
         }
         stage ("Terraform Command") {
             steps {
+                ansiColor('xterm') {
                 echo "Choice is ${params.CHOICES}"
                 dir("${params.FOLDERTF}"){
                     script {
                         sh "echo $PATH"
-                        sh "terraform init -no-color"
-                        sh "terraform validate -no-color"
-                        sh "terraform plan -no-color"
+                        sh "terraform init"
+                        sh "terraform validate"
+                        sh "terraform plan"
                         if ("${params.CHOICES}" == 'terraform apply'){
                             sh "${params.CHOICES}"
                         }
                     }
+                }
                 }
             }
         }
