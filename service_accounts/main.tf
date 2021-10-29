@@ -9,12 +9,6 @@ resource "google_service_account" "testserviceaccount" {
   project = each.value["project"]
   #unique_id = each.value["unique_id"]
 }
-terraform {
-  backend "gcs" {
-    bucket  = "mybucket-7777777"
-    prefix  = "testprefixstate"
-  }
-}
 output "testcheck-for-project" {
   value = {
     #for
