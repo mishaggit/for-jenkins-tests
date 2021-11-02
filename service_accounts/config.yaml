@@ -1,0 +1,14 @@
+---
+test_terraform1:
+  account_id : "test-terraform1"
+  display_name : "Test-display-name1"
+  #email : "Email"
+  #id : "What is this id about?"
+  #name : "What is the name?"
+  project : "myproject-7777777"
+  #unique_id : "123456789"
+test_terraform2:
+  display_name : "Test-display-name2"
+  account_id : "test-terraform2"
+  project : "myproject-7777777"
+...

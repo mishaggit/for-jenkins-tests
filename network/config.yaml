@@ -1,0 +1,10 @@
+---
+project_id : "myproject-7777777"
+region : "europe-west1"
+zone : "europe-west1-b"
+network : "test-network"
+auto_create_subnetworks : false
+subnetwork : "test-subnet"
+ip_cidr_range1 : "10.10.0.0/16"
+ip_range_pods_name : "test-ip-range-pods"
+ip_cidr_range2 : "10.20.0.0/16"
