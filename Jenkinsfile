@@ -33,12 +33,6 @@ pipeline {
                         sh "terraform init"
                         sh "terraform validate"
                         sh "terraform plan"
-<<<<<<< HEAD
-=======
-                        if ("${params.CHOICES}" == 'terraform apply'){
-                            sh "${params.CHOICES}"
-                        }
->>>>>>> 75a2160a9459cfc322ebd061bb3fe55155ce9eda
                     }
                 }
                 }
@@ -48,7 +42,6 @@ pipeline {
             when { anyOf {branch "main";branch "master" } }
             steps {
                 ansiColor('xterm') {
-<<<<<<< HEAD
                 script {
                     dir("${params.FOLDERTF}") {
                     if ("${params.CHOICES}" == 'terraform apply') {
@@ -56,12 +49,6 @@ pipeline {
                         sh "${params.CHOICES} -auto-approve"
                     }
                     }
-=======
-                dir("${params.FOLDERTF}") {
-                    if ("${params.CHOICES}" == 'terraform apply') {
-                        sh "${params.CHOICES} -auto-approve"
-                    }
->>>>>>> 75a2160a9459cfc322ebd061bb3fe55155ce9eda
                 }
                 }
             }
