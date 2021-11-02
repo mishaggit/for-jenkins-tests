@@ -23,6 +23,7 @@ pipeline {
             }
         }
         stage ("Terraform Command") {
+            
             steps {
                 ansiColor('xterm') {
                 echo "Choice is ${params.CHOICES}"
@@ -35,6 +36,18 @@ pipeline {
                         if ("${params.CHOICES}" == 'terraform apply'){
                             sh "${params.CHOICES}"
                         }
+                    }
+                }
+                }
+            }
+        }
+        stage('TF Apply') {
+            when { anyOf {branch "main";branch "master" } }
+            steps {
+                ansiColor('xterm') {
+                dir("${params.FOLDERTF}") {
+                    if ("${params.CHOICES}" == 'terraform apply') {
+                        sh "${params.CHOICES} -auto-approve"
                     }
                 }
                 }
