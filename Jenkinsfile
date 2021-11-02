@@ -33,9 +33,6 @@ pipeline {
                         sh "terraform init"
                         sh "terraform validate"
                         sh "terraform plan"
-                        if ("${params.CHOICES}" == 'terraform apply'){
-                            sh "${params.CHOICES}"
-                        }
                     }
                 }
                 }
@@ -45,9 +42,12 @@ pipeline {
             when { anyOf {branch "main";branch "master" } }
             steps {
                 ansiColor('xterm') {
-                dir("${params.FOLDERTF}") {
+                script {
+                    dir("${params.FOLDERTF}") {
                     if ("${params.CHOICES}" == 'terraform apply') {
+                        input(message: 'Do you want TF Apply', ok: 'Proceed')
                         sh "${params.CHOICES} -auto-approve"
+                    }
                     }
                 }
                 }
