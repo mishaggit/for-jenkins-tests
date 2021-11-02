@@ -44,10 +44,8 @@ pipeline {
                 ansiColor('xterm') {
                 script {
                     dir("${params.FOLDERTF}") {
-                    if ("${params.CHOICES}" == 'terraform apply') {
                         input(message: 'Do you want TF Apply', ok: 'Proceed')
                         sh "${params.CHOICES} -auto-approve"
-                    }
                     }
                 }
                 }
