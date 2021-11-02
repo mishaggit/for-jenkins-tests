@@ -33,9 +33,6 @@ pipeline {
                         sh "terraform init"
                         sh "terraform validate"
                         sh "terraform plan"
-                        if ("${params.CHOICES}" == 'terraform apply'){
-                            sh "${params.CHOICES}"
-                        }
                     }
                 }
                 }
