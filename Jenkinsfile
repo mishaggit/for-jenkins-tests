@@ -25,7 +25,15 @@ pipeline {
         }
         stage('Find all fodlers from given folder') {
             steps {
-                dir("${params.FOLDERTF}") {
+                dir('mydir') {
+                    def files = findFiles() 
+                    files.each { f ->
+                        if(f.directory) {
+                            echo "This is directory: ${f.name} "
+                        }
+                    }
+                }
+                /*dir("${params.FOLDERTF}") {
                     script {
                         def foldersList = []
                         def osName = isUnix() ? "UNIX" : "WINDOWS"
@@ -42,7 +50,7 @@ pipeline {
                         }
                         echo ".... " + foldersList
                     }
-                }
+                }*/
             }
         }
         stage ("Terraform Command") {
