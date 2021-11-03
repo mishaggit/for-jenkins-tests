@@ -4,7 +4,7 @@ pipeline {
     }
     parameters {
         choice(name: 'CHOICES', choices: ['terraform plan', 'terraform apply'], description: 'Choose terraform command')
-        string(name: 'FOLDERTF', defaultValue: './', description: 'Folder with .tf files')
+        string(name: 'FOLDERTF', defaultValue: 'all', description: 'Folder with .tf files')
         //string(name: 'FOLDERTF', defaultValue: '', description: 'Folder with .tf files')
         //choice(name: 'FOLDERTF', choices: ['service_accounts', 'network', 'gke cluster'], description: 'Folder with .tf files')
         //string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
@@ -26,29 +26,9 @@ pipeline {
         }
         stage('Find all fodlers from given folder') {
             steps {
-                dir("${params.FOLDERTF}") {
                     script {
                         sh "find ./ -type d"
                     }
-                }
-                /*dir("${params.FOLDERTF}") {
-                    script {
-                        def foldersList = []
-                        def osName = isUnix() ? "UNIX" : "WINDOWS"
-
-                        echo ".... JENKINS_HOME: ${JENKINS_HOME}"
-
-                        if(isUnix()) {
-                            def output = sh returnStdout: true, script: "ls -l ${JENKINS_HOME} | grep ^d | awk '{print \$9}'"
-                            foldersList = output.tokenize('\n').collect() { it }
-                        } else {
-                            def output = bat returnStdout: true, script: "dir \"${JENKINS_HOME}\" /b /A:D"
-                            foldersList = output.tokenize('\n').collect() { it }
-                            foldersList = foldersList.drop(2)
-                        }
-                        echo ".... " + foldersList
-                    }
-                }*/
             }
         }
         stage ("Terraform Command") {
