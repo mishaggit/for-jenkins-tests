@@ -6,6 +6,7 @@ pipeline {
         choice(name: 'CHOICES', choices: ['terraform plan', 'terraform apply'], description: 'Choose terraform command')
         string(name: 'FOLDERTF', defaultValue: 'service_accounts', description: 'Folder with .tf files')
         //string(name: 'FOLDERTF', defaultValue: '', description: 'Folder with .tf files')
+        //choice(name: 'FOLDERTF', choices: ['service_accounts', 'network', 'gke cluster'], description: 'Folder with .tf files')
         //string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
         //booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
