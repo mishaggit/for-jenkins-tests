@@ -25,21 +25,23 @@ pipeline {
         }
         stage('Find all fodlers from given folder') {
             steps {
-                script {
-                    def foldersList = []
-                    def osName = isUnix() ? "UNIX" : "WINDOWS"
+                dir("${params.FOLDERTF}") {
+                    script {
+                        def foldersList = []
+                        def osName = isUnix() ? "UNIX" : "WINDOWS"
 
-                    echo ".... JENKINS_HOME: ${JENKINS_HOME}"
+                        echo ".... JENKINS_HOME: ${JENKINS_HOME}"
 
-                    if(isUnix()) {
-                        def output = sh returnStdout: true, script: "ls -l ${JENKINS_HOME} | grep ^d | awk '{print \$9}'"
-                        foldersList = output.tokenize('\n').collect() { it }
-                    } else {
-                        def output = bat returnStdout: true, script: "dir \"${JENKINS_HOME}\" /b /A:D"
-                        foldersList = output.tokenize('\n').collect() { it }
-                        foldersList = foldersList.drop(2)
+                        if(isUnix()) {
+                            def output = sh returnStdout: true, script: "ls -l ${JENKINS_HOME} | grep ^d | awk '{print \$9}'"
+                            foldersList = output.tokenize('\n').collect() { it }
+                        } else {
+                            def output = bat returnStdout: true, script: "dir \"${JENKINS_HOME}\" /b /A:D"
+                            foldersList = output.tokenize('\n').collect() { it }
+                            foldersList = foldersList.drop(2)
+                        }
+                        echo ".... " + foldersList
                     }
-                    echo ".... " + foldersList
                 }
             }
         }
