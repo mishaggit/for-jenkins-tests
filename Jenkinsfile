@@ -26,10 +26,12 @@ pipeline {
         stage('Find all fodlers from given folder') {
             steps {
                 dir("${params.FOLDERTF}") {
-                    def files = findFiles() 
-                    files.each { f ->
-                        if(f.directory) {
-                            echo "This is directory: ${f.name} "
+                    script {
+                        def files = findFiles() 
+                        files.each { f ->
+                            if(f.directory) {
+                                echo "This is directory: ${f.name} "
+                            }
                         }
                     }
                 }
