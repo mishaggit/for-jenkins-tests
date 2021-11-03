@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Find all fodlers from given folder') {
             steps {
-                dir('mydir') {
+                dir("${params.FOLDERTF}") {
                     def files = findFiles() 
                     files.each { f ->
                         if(f.directory) {
