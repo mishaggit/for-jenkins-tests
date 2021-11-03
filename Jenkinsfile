@@ -45,7 +45,7 @@ pipeline {
                 script {
                     dir("${params.FOLDERTF}") {
                         input(message: 'Do you want TF Apply', ok: 'Proceed')
-                        sh "${params.CHOICES} -auto-approve"
+                        sh "${params.CHOICES} -input=false -auto-approve"
                     }
                 }
                 }
