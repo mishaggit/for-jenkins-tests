@@ -37,8 +37,8 @@ pipeline {
                     echo "=================================list"
                     //sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
                     //sh "for folderstf in ./* ; do echo $folderstf; done"
-                    for (value in "$folderstf") {
-                        println "Folder is ${value}"
+                    for (item in "$folderstf") {
+                        println item
                     }
                 }
             }
