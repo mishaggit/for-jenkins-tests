@@ -30,8 +30,8 @@ pipeline {
                     sh "find -path './[^.]*' -prune -type d"
                     //sh "find ./ -type d"
                     echo "================================="
-                    sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
-                    //sh "for dir in ./[^.]*; do echo $dir; done"
+                    //sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
+                    sh "for dir in ./[^.]*; do echo $dir; done"
 
                 }
             }
