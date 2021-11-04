@@ -27,7 +27,7 @@ pipeline {
         stage('Find all fodlers from given folder') {
             steps {
                 script {
-                    folders = sh(returnStdout: true, script: "find -path '/[^.]*' -prune -type d").trim()
+                    folders = sh(returnStdout: true, script: "find -path './[^.]*' -prune -type d").trim()
                     echo "$folders"
                     //folderstf = "$folders".toArray()
                     folderstf = "$folders".split()
@@ -37,7 +37,7 @@ pipeline {
                     echo "=================================list"
                     //sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
                     //sh "for folderstf in ./* ; do echo $folderstf; done"
-                    for (item in "$folderstf") {
+                    for (item in $folderstf) {
                         println item
                     }
                 }
