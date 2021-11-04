@@ -34,11 +34,12 @@ pipeline {
                     folderstf2 = "$folders".split()
                     //sh "find ./ -type d"
                     //echo "$folderstf1"
-                    echo "================================="
+                    echo "=================================list"
                     echo "$folderstf2"
-                    echo "================================="
+                    echo "=================================list"
                     //sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
-                    sh "for folderstf2 in ./* ; do echo $folderstf2; done"
+                    //sh "for folderstf2 in ./* ; do echo $folderstf2; done"
+                    sh "for value in folderstf2 ; do echo $value; done"
 
                 }
             }
