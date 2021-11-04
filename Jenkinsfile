@@ -27,11 +27,12 @@ pipeline {
         stage('Find all fodlers from given folder') {
             steps {
                 script {
-                    sh "find -path './[^.]*' -prune -type d"
+                    folderstf = sh(returnStdout: true, script: "find -path './[^.]*' -prune -type d").trim()
                     //sh "find ./ -type d"
+                    echo "$folderstf"
                     echo "================================="
                     //sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
-                    sh "for value in ./[^.]* ; do echo $value; done"
+                    sh "for folderstf in ./* ; do echo $folderstf; done"
 
                 }
             }
