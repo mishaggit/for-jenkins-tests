@@ -6,7 +6,7 @@ pipeline {
         choice(name: 'CHOICES', choices: ['terraform plan', 'terraform apply'], description: 'Choose terraform command')
         string(name: 'FOLDERTF', defaultValue: 'all', description: 'Folder with .tf files')
         //string(name: 'FOLDERTF', defaultValue: '', description: 'Folder with .tf files')
-        //choice(name: 'FOLDERTF', choices: ['service_accounts', 'network', 'gke cluster'], description: 'Folder with .tf files')
+        choice(name: 'FOLDERTFs', choices: ['service_accounts', 'network', 'gke cluster'], description: 'Folder with .tf files')
         //string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
         //booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
@@ -30,7 +30,8 @@ pipeline {
                     sh "find -path './[^.]*' -prune -type d"
                     //sh "find ./ -type d"
                     echo "================================="
-                    sh "for ii in ./*; do echo $ii; done"
+                    sh "for value in ./[^.]*; do echo $value; done"
+
                 }
             }
         }
@@ -38,15 +39,25 @@ pipeline {
             
             steps {
                 ansiColor('xterm') {
-                echo "Choice is ${params.CHOICES}"
-                dir("${params.FOLDERTF}"){
-                    script {
-                        sh "echo $PATH"
-                        sh "terraform init"
-                        sh "terraform validate"
-                        sh "terraform plan"
+                    echo "Choice is ${params.CHOICES}"
+                    for (foldertf in ${params.FOLDERTFs}) {
+                        dir("$foldertf"){
+                            script {
+                                sh "echo $PATH"
+                                sh "terraform init"
+                                sh "terraform validate"
+                                sh "terraform plan"
+                            }
+                        }
                     }
-                }
+                    /*dir("${params.FOLDERTF}"){
+                        script {
+                            sh "echo $PATH"
+                            sh "terraform init"
+                            sh "terraform validate"
+                            sh "terraform plan"
+                        }
+                    }*/
                 }
             }
         }
