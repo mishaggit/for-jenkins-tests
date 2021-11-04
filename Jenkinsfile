@@ -39,10 +39,7 @@ pipeline {
                     //sh "for folderstf in ./* ; do echo $folderstf; done"
                     //for (item in "$folderstf") { println item }
                     folderstf.each {
-                        val -> dir"$val"
-                        sh "echo $PATH"
-                        sh "terraform init"
-                        sh "terraform plan"
+                        val -> println "$val"
                     }
                 }
             }
@@ -52,8 +49,8 @@ pipeline {
             steps {
                 ansiColor('xterm') {
                     echo "Choice is ${params.CHOICES}"
-                    /*for (foldertf in ${params.FOLDERTFs}) {
-                        dir("$foldertf"){
+                    folderstf.each {
+                        val -> dir("$val"){
                             script {
                                 sh "echo $PATH"
                                 sh "terraform init"
@@ -61,15 +58,15 @@ pipeline {
                                 sh "terraform plan"
                             }
                         }
-                    }*/
-                    dir("${params.FOLDERTF}"){
+                    }
+                    /*dir("${params.FOLDERTF}"){
                         script {
                             sh "echo $PATH"
                             sh "terraform init"
                             sh "terraform validate"
                             sh "terraform plan"
                         }
-                    }
+                    }*/
                 }
             }
         }
