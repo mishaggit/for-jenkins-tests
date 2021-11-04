@@ -38,7 +38,7 @@ pipeline {
                     echo "$folderstf2"
                     echo "================================="
                     //sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
-                    //sh "for folderstf in ./* ; do echo $folderstf; done"
+                    sh "for folderstf2 in ./* ; do echo $folderstf2; done"
 
                 }
             }
