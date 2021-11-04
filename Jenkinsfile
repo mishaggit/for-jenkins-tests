@@ -27,8 +27,8 @@ pipeline {
         stage('Find all fodlers from given folder') {
             steps {
                     script {
-                        //sh "find ./ -type d"
-                        sh "for ii in ./*; do echo $ii; done"
+                        sh "find ./[^.]* -type d"
+                        //sh "for ii in ./*; do echo $ii; done"
                     }
             }
         }
