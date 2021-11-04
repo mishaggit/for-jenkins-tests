@@ -29,8 +29,8 @@ pipeline {
                 script {
                     folders = sh(returnStdout: true, script: "find -path './[^.]*' -prune -type d").trim()
                     echo "$folders"
-                    folderstf = "$folders".toArray()
-                    //folderstf = "$folders".split()
+                    //folderstf = "$folders".toArray()
+                    folderstf = "$folders".split()
                     //sh "find ./ -type d"
                     echo "=================================list"
                     echo "$folderstf"
