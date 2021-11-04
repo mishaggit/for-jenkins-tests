@@ -28,15 +28,17 @@ pipeline {
             steps {
                 script {
                     folders = sh(returnStdout: true, script: "find -path './[^.]*' -prune -type d").trim()
-                    def folderstf = folders.toArray()
-                    //sh "find ./ -type d"
-                    echo "$folderstf"
+                    echo "$folders"
                     echo "================================="
+                    folderstf1 = folders.toArray()
                     folderstf2 = folders.split()
+                    //sh "find ./ -type d"
+                    echo "$folderstf1"
+                    echo "================================="
                     echo "$folderstf2"
                     echo "================================="
                     //sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
-                    sh "for folderstf in ./* ; do echo $folderstf; done"
+                    //sh "for folderstf in ./* ; do echo $folderstf; done"
 
                 }
             }
