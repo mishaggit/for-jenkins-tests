@@ -29,7 +29,6 @@ pipeline {
                 script {
                     folders = sh(returnStdout: true, script: "find -path './[^.]*' -prune -type d").trim()
                     echo "$folders"
-                    echo "================================="
                     //folderstf1 = "$folders".toArray()
                     folderstf2 = "$folders".split()
                     //sh "find ./ -type d"
@@ -39,7 +38,7 @@ pipeline {
                     echo "=================================list"
                     //sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
                     //sh "for folderstf2 in ./* ; do echo $folderstf2; done"
-                    sh "for value in folderstf2 ; do echo $value; done"
+                    sh "for value in $folderstf2 ; do echo $value; done"
 
                 }
             }
