@@ -32,9 +32,6 @@ pipeline {
                     echo "================================="
                     sh "for ii in ./*; do echo $ii; done"
                 }
-                sh '''
-                for ii in ./*; do echo $ii; done
-                '''
             }
         }
         stage ("Terraform Command") {
