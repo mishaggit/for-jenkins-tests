@@ -28,9 +28,7 @@ pipeline {
             steps {
                     script {
                         //sh "find ./ -type d"
-                        sh "for i in */ ; do
-                            echo $i
-                        done"
+                        sh "for i in */; do echo $i; done"
                     }
             }
         }
