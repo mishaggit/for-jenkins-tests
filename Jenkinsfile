@@ -27,10 +27,10 @@ pipeline {
         stage('Find all fodlers from given folder') {
             steps {
                 script {
-                    folders = sh(returnStdout: true, script: "find -path './[^.]*' -prune -type d").trim()
+                    folders = sh(returnStdout: true, script: "find -path '/[^.]*' -prune -type d").trim()
                     echo "$folders"
                     //folderstf = "$folders".toArray()
-                    folderstf = "$folders".split("./")
+                    folderstf = "$folders".split()
                     //sh "find ./ -type d"
                     echo "=================================list"
                     echo "$folderstf"
