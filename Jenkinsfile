@@ -30,10 +30,10 @@ pipeline {
                     folders = sh(returnStdout: true, script: "find -path './[^.]*' -prune -type d").trim()
                     echo "$folders"
                     echo "================================="
-                    folderstf1 = "$folders".toArray()
+                    //folderstf1 = "$folders".toArray()
                     folderstf2 = "$folders".split()
                     //sh "find ./ -type d"
-                    echo "$folderstf1"
+                    //echo "$folderstf1"
                     echo "================================="
                     echo "$folderstf2"
                     echo "================================="
