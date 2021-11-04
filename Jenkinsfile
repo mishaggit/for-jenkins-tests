@@ -38,7 +38,12 @@ pipeline {
                     //sh "for value in (find -path './[^.]*' -prune -type d); do echo $value; done"
                     //sh "for folderstf in ./* ; do echo $folderstf; done"
                     //for (item in "$folderstf") { println item }
-                    folderstf.each { val -> println val }
+                    folderstf.each {
+                        val -> dir"$val"
+                        sh "echo $PATH"
+                        sh "terraform init"
+                        sh "terraform plan"
+                    }
                 }
             }
         }
