@@ -60,7 +60,7 @@ pipeline {
                                 sh "terraform plan"
                             }
                         }
-                    }*/
+                    }
                     dir("${params.FOLDERTF}"){
                         script {
                             sh "echo $PATH"
