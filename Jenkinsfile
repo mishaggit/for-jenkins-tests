@@ -60,14 +60,14 @@ pipeline {
                             }
                         }
                     } 
-                    dir("${params.FOLDERTF}"){
+                    /*dir("${params.FOLDERTF}"){
                         script {
                             sh "echo $PATH"
                             sh "terraform init"
                             sh "terraform validate"
                             sh "terraform plan"
                         }
-                    }
+                    }*/
             }
         }
         stage('TF Apply') {
