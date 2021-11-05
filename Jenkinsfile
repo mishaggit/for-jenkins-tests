@@ -54,6 +54,7 @@ pipeline {
                         dir("$value"){
                             script {
                                 sh "echo $PATH"
+                                sh "echo test"
                                 sh "terraform init"
                                 sh "terraform validate"
                                 sh "terraform plan"
