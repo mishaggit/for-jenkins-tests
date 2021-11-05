@@ -50,8 +50,8 @@ pipeline {
             steps {
                 ansiColor('xterm') {
                     echo "Choice is ${params.CHOICES}"
-                    /*folderstf.each {
-                        val -> dir("$val"){
+                    for (value in folderstf) {
+                        dir("$value"){
                             script {
                                 sh "echo $PATH"
                                 sh "terraform init"
