@@ -2,6 +2,7 @@ pipeline {
     agent {
         label 'slave'
     }
+    options {ansiColor('xterm') }
     parameters {
         choice(name: 'CHOICES', choices: ['terraform plan', 'terraform apply'], description: 'Choose terraform command')
         string(name: 'FOLDERTF', defaultValue: 'all', description: 'Folder with .tf files')
@@ -46,9 +47,7 @@ pipeline {
             }
         }
         stage ("Terraform Command") {
-            
             steps {
-                ansiColor('xterm') {
                     echo "Choice is ${params.CHOICES}"
                     script {
                         for (value in folderstf) {
@@ -69,7 +68,6 @@ pipeline {
                             sh "terraform plan"
                         }
                     }
-                }
             }
         }
         stage('TF Apply') {
