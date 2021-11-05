@@ -39,7 +39,8 @@ pipeline {
                     //sh "for folderstf in ./* ; do echo $folderstf; done"
                     //for (item in "$folderstf") { println item }
                     folderstf.each {
-                        val -> println "$val"
+                        //val -> println "$val"
+                        val -> dir("$val") {script {sh "terraform init"}}
                     }
                 }
             }
