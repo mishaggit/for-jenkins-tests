@@ -77,7 +77,7 @@ pipeline {
                     script {
                         for (value in folderstf){
                             dir("$value") {
-                                sh "echo test apply"
+                                sh "echo test apply update"
                                 input(message: 'Do you want TF Apply', ok: 'Proceed')
                                 sh "terraform apply -input=false -auto-approve"
                                 //sh "${params.CHOICES} -input=false -auto-approve"
