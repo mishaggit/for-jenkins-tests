@@ -17,14 +17,4 @@ gke_cluster_test1:
       service_account_email : "test-terraform1@myproject-7777777.iam.gserviceaccount.com"
       autoscaling :
         min_node_count : 1
-        max_node_count : 2
-    - name: "test-gke-node-pool-2"
-      machine_type : "e2-medium"
-      initial_node_count : 1
-      disk_size_gb : 10
-      disk_type : 'pd-standard'
-      preemptible : true
-      service_account_email : "test-terraform1@myproject-7777777.iam.gserviceaccount.com"
-      autoscaling :
-        min_node_count : 1
-        max_node_count : 2
+        max_node_count : 1
