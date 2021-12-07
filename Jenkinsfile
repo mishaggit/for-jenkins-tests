@@ -19,7 +19,7 @@ pipeline {
         stage('1-Test') {
             steps {
                 echo "Testing..................................."
-                //echo "Privet ${PROJECT_NAME}"
+                echo "Privet ${PROJECT_NAME}"
                 //echo "Owner is ${OWNER_NAME}"
                 sh "echo $PATH"
                 echo "End of Stage Build........................"
