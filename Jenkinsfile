@@ -20,8 +20,9 @@ pipeline {
                 sh "gcloud container images list"
                 echo "=================================list"
                 sh "gcloud container images list-tags gcr.io/myproject-7777777/sametest"
-                sh "gcloud container images list-tags gcr.io/myproject-7777777/sametest --filter='-tags:*'  --format="get(digest)" --limit=$BIG_NUMBER"
-                sh "gcloud container images delete gcr.io/myproject-7777777/sametest@DIGEST --quiet"
+                //sh "gcloud container images list-tags gcr.io/myproject-7777777/sametest --filter='-tags:*'  --format="get(digest)" --limit=$BIG_NUMBER"
+                //sh "gcloud container images delete gcr.io/myproject-7777777/sametest@DIGEST --quiet"
+                sh "gcloud container images delete gcr.io/myproject-7777777/sametest"
                 echo "End of Stage Build........................"
                 script {
                     images = sh(returnStdout: true, script: "gcloud container images list").trim()
