@@ -21,6 +21,7 @@ pipeline {
                 echo "End of Stage Build........................"
             }
         }
+        /*
         stage('Find all fodlers from given folder') {
             steps {
                 script {
@@ -31,7 +32,7 @@ pipeline {
                     echo "$folderstf"
                     echo "=================================list"
                     folderstf.each {
-                        val -> dir("$val") {script {sh "terraform init"}}
+                        val -> dir("$val") {script {sh "echo test"}}
                     }
                 }
             }
@@ -44,14 +45,12 @@ pipeline {
                         dir("$value"){
                             sh "echo $PATH"
                             sh "echo test"
-                            sh "terraform init"
-                            sh "terraform validate"
-                            sh "terraform plan"
                         }
                     }
                 }
             }
         }
+        */
     }
     post {
         always {
