@@ -4,7 +4,7 @@ pipeline {
     }
     options {ansiColor('xterm') }
     parameters {
-        choice(name: 'CHOICES', choices: ['gcr.io/myproject-7777777/sometest', 'gcr.io/myproject-7777777/sametest'], description: 'Choose GCR path')
+        choice(name: 'CHOICES', choices: ['gcr.io/myproject-7777777/sametest'], description: 'Choose GCR path')
         string(name: 'FOLDERTF', defaultValue: 'all', description: 'Folder with .tf files')
         choice(name: 'FOLDERTFs', choices: ['service_accounts', 'network', 'gke cluster'], description: 'Folder with .tf files')
     }
