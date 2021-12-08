@@ -4,7 +4,7 @@ pipeline {
     }
     options {ansiColor('xterm') }
     parameters {
-        choice(name: 'CHOICES', choices: ['terraform plan', 'terraform apply'], description: 'Choose terraform command')
+        choice(name: 'CHOICES', choices: ['gcr.io/myproject-7777777/sometest', 'gcr.io/myproject-7777777/sametest'], description: 'Choose GCR path')
         string(name: 'FOLDERTF', defaultValue: 'all', description: 'Folder with .tf files')
         choice(name: 'FOLDERTFs', choices: ['service_accounts', 'network', 'gke cluster'], description: 'Folder with .tf files')
     }
@@ -21,6 +21,13 @@ pipeline {
                 echo "=================================list"
                 sh "gcloud container images list-tags gcr.io/myproject-7777777/sometest"
                 echo "End of Stage Build........................"
+                script {
+                    images = sh(returnStdout: true, script: "gcloud container images list").trim()
+                    echo "$images"
+                    allimages = "$images".split()
+                    echo "$allimages"
+                }
+
             }
         }
         /*
