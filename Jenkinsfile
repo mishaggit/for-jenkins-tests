@@ -4,7 +4,7 @@ pipeline {
     }
     options {ansiColor('xterm') }
     parameters {
-        choice(name: 'CHOICES', choices: ['gcr.io/myproject-7777777/sametest'], description: 'Choose GCR path')
+        choice(name: 'CHOICES', choices: ['gcr.io/myproject-7777777/sometest'], description: 'Choose GCR path')
     }
     environment {
       PROJECT_NAME = "TestJenkins"
