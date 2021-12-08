@@ -16,8 +16,10 @@ pipeline {
         stage('1-Test') {
             steps {
                 echo "Testing..................................."
-                sh "echo $PATH"
+                //sh "echo $PATH"
                 sh "gcloud container images list"
+                echo "=================================list"
+                sh "gcloud container images list-tags"
                 echo "End of Stage Build........................"
             }
         }
