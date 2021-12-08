@@ -19,7 +19,7 @@ pipeline {
                 //sh "echo $PATH"
                 sh "gcloud container images list"
                 echo "=================================list"
-                sh "gcloud container images list-tags"
+                sh "gcloud container images list-tags 8ec7cc11f4a3"
                 echo "End of Stage Build........................"
             }
         }
