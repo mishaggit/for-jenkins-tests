@@ -9,7 +9,7 @@ pipeline {
         choice(name: 'FOLDERTFs', choices: ['service_accounts', 'network', 'gke cluster'], description: 'Folder with .tf files')
     }
     environment {
-      PROJECT_NAME = "TestTerraform"
+      PROJECT_NAME = "TestJenkins"
       OWNER_NAME   = "Misha"
     }
     stages {
