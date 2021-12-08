@@ -24,7 +24,7 @@ pipeline {
                 //sh "gcloud container images list-tags ${params.CHOICES}"               
                 echo "End of Stage Build........................"
                 script {
-                    images = sh(returnStdout: true, script: "gcloud container images list").trim()
+                    images = sh(returnStdout: true, script: "gcloud container images list --format=json | jq '.[].name' -r").trim()
                     echo "$images"
                     allimages = "$images".split()
                     echo "$allimages"
@@ -36,6 +36,13 @@ pipeline {
             }
         }
         /*
+             --format=FORMAT
+        Set the format for printing command output resources. The default is a
+        command-specific human-friendly output format. The supported formats
+        are: config, csv, default, diff, disable, flattened, get, json, list,
+        multi, none, object, table, text, value, yaml. For more details run $
+        gcloud topic formats.
+
         stage('Find all fodlers from given folder') {
             steps {
                 script {
