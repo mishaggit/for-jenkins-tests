@@ -19,7 +19,7 @@ pipeline {
                 sh "gcloud container images list-tags gcr.io/myproject-7777777/sometest"
                 echo "=================================list"
                 //sh "gcloud container images list-tags gcr.io/myproject-7777777/sametest --filter='-tags:*'  --format="get(digest)" --limit=$BIG_NUMBER"
-                sh "gcloud container images list-tags gcr.io/myproject-7777777/sametest --filter='-tags:*'  --format="get(digest)""
+                sh "gcloud container images list-tags gcr.io/myproject-7777777/sametest --filter='-tags:*'  --format=\"get(digest)\" "
                 sh "gcloud container images delete gcr.io/myproject-7777777/sametest@DIGEST --quiet"
                 //sh "gcloud container images delete gcr.io/myproject-7777777/sametest:red"
                 //sh "gcloud container images list-tags ${params.CHOICES}"            
