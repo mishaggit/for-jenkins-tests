@@ -26,11 +26,11 @@ pipeline {
                 script {
                     images = sh(returnStdout: true, script: "gcloud container images list --format=json | jq '.[].name' -r").trim()
                     echo "$images"
-                    allimages = "$images".split()
+                    /*allimages = "$images".split()
                     echo "$allimages"
                     allimages.each {
                         val -> "$val" {script {sh "echo test install jq"}}
-                    }
+                    }*/
                 }
 
             }
