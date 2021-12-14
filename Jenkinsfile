@@ -19,18 +19,19 @@ pipeline {
                 sh "gcloud container images list-tags gcr.io/myproject-7777777/sometest"
                 echo "=================================list"
                 //sh "gcloud container images list-tags gcr.io/myproject-7777777/sametest --filter='-tags:*'  --format="get(digest)" --limit=$BIG_NUMBER"
-                //sh "gcloud container images delete gcr.io/myproject-7777777/sametest@DIGEST --quiet"
+                sh "gcloud container images list-tags gcr.io/myproject-7777777/sametest --filter='-tags:*'  --format='get(digest)'"
+                sh "gcloud container images delete gcr.io/myproject-7777777/sametest@DIGEST --quiet"
                 //sh "gcloud container images delete gcr.io/myproject-7777777/sametest:red"
-                //sh "gcloud container images list-tags ${params.CHOICES}"               
+                //sh "gcloud container images list-tags ${params.CHOICES}"            
                 echo "End of Stage Build........................"
                 script {
                     images = sh(returnStdout: true, script: "gcloud container images list --format=json | jq '.[].name' -r").trim()
                     echo "$images"
                     allimages = "$images".split()
                     echo "$allimages"
-                    allimages.each {
+                    /*allimages.each {
                         val -> ("$val") {script {sh "echo test install jq"}}
-                    }
+                    }*/
                 }
 
             }
