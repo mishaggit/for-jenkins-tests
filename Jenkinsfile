@@ -24,7 +24,7 @@ pipeline {
                 script {
                     untaged = sh(returnStdout: true, script: "gcloud container images list-tags gcr.io/myproject-7777777/sametest --filter='-tags:*'  --format=\"get(digest)\" ")
                     echo "$untaged"
-                    sh "gcloud container images delete gcr.io/myproject-7777777/sametest@$untaged --quiet"
+                    //sh "gcloud container images delete gcr.io/myproject-7777777/sametest@$untaged --quiet"
                 }
                 //sh "gcloud container images delete gcr.io/myproject-7777777/sametest:red"
                 //sh "gcloud container images list-tags ${params.CHOICES}"            
