@@ -29,7 +29,7 @@ pipeline {
                     allimages = "$images".split()
                     echo "$allimages"
                     allimages.each {
-                        val -> "$val" {script {sh "echo test"}}
+                        val -> "$val" {script {sh "echo test install jq"}}
                     }
                 }
 
